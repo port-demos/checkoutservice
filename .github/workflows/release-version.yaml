@@ -91,7 +91,7 @@ jobs:
         properties: |-
             {
               "image_tags":  ${{ env.RELEASE_VERSION }},
-              "registry_id:  ${{ env.REGISTRY_NAME }}
+              "registry_id":  ${{ env.REGISTRY_NAME }}
             }
 
     # - uses: port-labs/port-github-action@v1
