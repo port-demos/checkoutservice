@@ -12,17 +12,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - uses: port-labs/port-github-action@v1
-      env:
-        RUN_ID: ${{ github.event.client_payload.action }}
-      with:
-        clientId: ${{ secrets.PORT_CLIENT_ID }}
-        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-        baseUrl: https://api.getport.io
-        operation: PATCH_RUN
-        runId: ${{ env.RUN_ID }}
-        status: "IN_PROGRESS"
-        logMessage: "Building docker image"
+    # - uses: port-labs/port-github-action@v1
+    #   env:
+    #     RUN_ID: ${{ github.event.client_payload.action }}_2
+    #   with:
+    #     clientId: ${{ secrets.PORT_CLIENT_ID }}
+    #     clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+    #     operation: CREATE_RUN
+    #     icon: GithubActions
+    #     blueprint: service
+    #     action: myAction
+    #     identifier: ${{ env.RUN_ID }}
+    #     properties: |-
+    #       {
+    #         "text": "test",
+    #         "number": 1,
+    #         "boolean": true
+
+    #     logMessage: "Building docker image"
 
     - name: Create Release
       id: create_release
@@ -87,15 +94,15 @@ jobs:
               "registry_id:  ${{ env.REGISTRY_NAME }}
             }
 
-    - uses: port-labs/port-github-action@v1
-      env:
-        RUN_ID: ${{ github.event.client_payload.action }}
-      with:
-        clientId: ${{ secrets.PORT_CLIENT_ID }}
-        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
-        baseUrl: https://api.getport.io
-        operation: PATCH_RUN
-        runId: ${{ env.RUN_ID }}
-        logMessage: "Docker image released! ✅"
-        summary: "A new version ${{ env.SERVICE_NAME }} was build and push "
-        link: '["gcr.io/sre-playground-378016/${{ env.REGISTRY_NAME }}/${{ env.SERVICE_NAME }}:${{ env.RELEASE_VERSION }}"]'
+    # - uses: port-labs/port-github-action@v1
+    #   env:
+    #     RUN_ID: ${{ github.event.client_payload.action }}
+    #   with:
+    #     clientId: ${{ secrets.PORT_CLIENT_ID }}
+    #     clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+    #     baseUrl: https://api.getport.io
+    #     operation: PATCH_RUN
+    #     runId: ${{ env.RUN_ID }}
+    #     logMessage: "Docker image released! ✅"
+    #     summary: "A new version ${{ env.SERVICE_NAME }} was build and push "
+    #     link: '["gcr.io/sre-playground-378016/${{ env.REGISTRY_NAME }}/${{ env.SERVICE_NAME }}:${{ env.RELEASE_VERSION }}"]'
