@@ -90,8 +90,8 @@ jobs:
           ["SRE"]
         properties: |-
             {
-              "image_tags":  ${{ env.RELEASE_VERSION }},
-              "registry_id":  ${{ env.REGISTRY_NAME }}
+              "image_tags":  "${{ env.RELEASE_VERSION }}",
+              "registry_id":  "${{ env.REGISTRY_NAME }}"
             }
 
     # - uses: port-labs/port-github-action@v1
