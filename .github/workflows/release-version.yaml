@@ -16,8 +16,8 @@ jobs:
       env:
         SERVICE_NAME: ${{ github.event.client_payload.service_name }}
       with:
-        clientId: ${{ secrets.CLIENT_ID }}
-        clientSecret: ${{ secrets.CLIENT_SECRET }}
+        clientId: ${{ secrets.PORT_CLIENT_ID }}
+        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
         baseUrl: https://api.getport.io
         operation: CREATE_RUN
         icon: GithubActions
@@ -78,8 +78,8 @@ jobs:
         RELEASE_VERSION: ${{ github.event.client_payload.version }}
         REGISTRY_NAME: ${{ github.event.client_payload.image_registry }}
       with:
-        clientId: ${{ secrets.PORT_CLIENT_ID }}
-        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+        clientId: ${{ secrets.PORT.PORT_CLIENT_ID }}
+        clientSecret: ${{ secrets.PORT.PORT_CLIENT_SECRET }}
         baseUrl: https://api.getport.io
         operation: UPSERT
         icon: "Docker"
@@ -100,8 +100,8 @@ jobs:
         RELEASE_VERSION: ${{ github.event.client_payload.version }}
         REGISTRY_NAME: ${{ github.event.client_payload.image_registry }}
       with:
-        clientId: ${{ secrets.CLIENT_ID }}
-        clientSecret: ${{ secrets.CLIENT_SECRET }}
+        clientId: ${{ secrets.PORT_CLIENT_ID }}
+        clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
         baseUrl: https://api.getport.io
         operation: PATCH_RUN
         runId: release-${{ env.SERVICE_NAME }}
