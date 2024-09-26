@@ -14,22 +14,15 @@ jobs:
 
     - uses: port-labs/port-github-action@v1
       env:
-        SERVICE_NAME: ${{ github.event.client_payload.service_name }}
+        RUN_ID: ${{ github.event.client_payload.action }}
       with:
         clientId: ${{ secrets.PORT_CLIENT_ID }}
         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
         baseUrl: https://api.getport.io
-        operation: CREATE_RUN
-        icon: GithubActions
-        blueprint: image
-        action: create_docker_image
-        identifier: release-${{ env.SERVICE_NAME }}
-        properties: |-
-          {
-            "text": "Relase service docker image",
-            "number": 1,
-            "boolean": true
-          }
+        operation: PATCH_RUN
+        runId: ${{ env.RUN_ID }}
+        status: "IN_PROGRESS"
+        logMessage: "Building docker image"
 
     - name: Create Release
       id: create_release
@@ -96,16 +89,13 @@ jobs:
 
     - uses: port-labs/port-github-action@v1
       env:
-        SERVICE_NAME: ${{ github.event.client_payload.service_name }}
-        RELEASE_VERSION: ${{ github.event.client_payload.version }}
-        REGISTRY_NAME: ${{ github.event.client_payload.image_registry }}
+        RUN_ID: ${{ github.event.client_payload.action }}
       with:
         clientId: ${{ secrets.PORT_CLIENT_ID }}
         clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
         baseUrl: https://api.getport.io
         operation: PATCH_RUN
-        runId: release-${{ env.SERVICE_NAME }}
-        status: "SUCCESS"
+        runId: ${{ env.RUN_ID }}
         logMessage: "Docker image released! ✅"
         summary: "A new version ${{ env.SERVICE_NAME }} was build and push "
         link: '["gcr.io/sre-playground-378016/${{ env.REGISTRY_NAME }}/${{ env.SERVICE_NAME }}:${{ env.RELEASE_VERSION }}"]'
