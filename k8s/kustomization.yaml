@@ -4,11 +4,6 @@ kind: Kustomization
 resources:
   - checkoutservice.yaml
 
-images:
-  - name: checkoutservice
-    newName: checkoutservice
-    newTag: 1.0
-
 configMapGenerator:
   - name: checkoutservice-env
     literals:
@@ -31,7 +26,7 @@ patchesStrategicMerge:
         spec:
           containers:
             - name: server
-              image: checkoutservice:1.0
+              image: gcr.io/sre-playground-378016/port-demo/adservice:1.0/checkoutservice:1.0
               envFrom:
                 - configMapRef:
                     name: checkoutservice-env
